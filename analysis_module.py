@@ -49,9 +49,9 @@ def load_eeg_data(data_directory=".") -> mne.Epochs:
             Array of indices of selected epochs (i.e., epochs that were not rejected or ignored).
     """
 
-    # Attempts to find path to the dataset, if it can't find the path it downloads the dataset
-    mne.datasets.kiloword.data_path(path=data_directory, force_update=False, update_path=True, download=True)
+    # Attempts to find path to the dataset, if it can't find the path it downloads the dataset, returns path to data file
+    file_path = mne.datasets.kiloword.data_path(path=data_directory, force_update=False, update_path=True, download=True)
     # Reads the raw data from the fif file, as found/downloaded in previous step
-    epochs_data = mne.read_epochs(f"{data_directory}/MNE-kiloword-data/kword_metadata-epo.fif")
+    epochs_data = mne.read_epochs(f"{file_path}/kword_metadata-epo.fif")
 
     return epochs_data
